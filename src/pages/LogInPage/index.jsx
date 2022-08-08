@@ -69,7 +69,7 @@ class LogInPage extends Component {
 
                             </Stack>
                             <Button variant="contained" type="submit">Log In</Button>
-                            <h4>Create new user account? click here</h4>
+                            <p>Create new user account? <a href="/signUp">click here</a></p>
                             {/*<Button variant="contained" onClick={handleClose}>Sign Up</Button>*/}
                         </ValidatorForm>
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     Button,
     Stack,
@@ -15,46 +15,43 @@ import IconButton from "@mui/joy/IconButton";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
 import swal from 'sweetalert';
+
 class SignUp extends Component {
     constructor(props) {
         super(props);
-        this.state={
-            value:1,
-            selectUserName:"",
-            selectProductTitle:"",
-            date:""
+        this.state = {
+            fullName: '',
+            lastName: '',
         }
     }
-    render() {
 
+    render() {
+        const submit = () => {
+            console.log("submit")
+            window.location.assign('/home');
+        }
 
         return (
             <>
-                <ValidatorForm  onError={error => console.log(error)}>
+                <ValidatorForm onSubmit={submit} onError={error => console.log(error)}>
                     <Stack direction="column" spacing={3}>
 
                         <Stack direction="row" spacing={5}>
-                            <TextValidator sx={{width: '100%'}}  label="Full Name"
+                            <TextValidator sx={{width: '100%'}} label="Full Name"
                                            variant="outlined"
                                            validators={['required',]}
-
-                                // value={this.state.customer.customerName}
-                                // onChange={(e) => {
-                                //     console.log()
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerName = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                           value={this.state.fullName}
+                                           onChange={(e) => {
+                                               this.setState({fullName: e.target.value})
+                                           }}
                             />
 
-                            <TextValidator sx={{width: '100%'}}  label="Last Name"
+                            <TextValidator sx={{width: '100%'}} label="Last Name"
                                            variant="outlined" validators={['required',]}
-                                // value={this.state.customer.customerNIC}
-                                // onChange={(e) => {
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerNIC = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                           value={this.state.lastName}
+                                           onChange={(e) => {
+                                               this.setState({lastName: e.target.value})
+                                           }}
                             />
 
                         </Stack>
@@ -63,22 +60,18 @@ class SignUp extends Component {
                             <TextValidator sx={{width: '100%'}}
                                            label="E-mail" variant="outlined"
                                            validators={['required',]}
-                                // value={this.state.customer.customerDrivingLicenseNo}
-                                // onChange={(e) => {
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerDrivingLicenseNo = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                           value={this.state.fullName}
+                                           onChange={(e) => {
+                                               this.setState({fullName: e.target.value})
+                                           }}
                             />
                             <TextValidator sx={{width: '100%'}} label="User Name"
                                            variant="outlined"
                                            validators={['required',]}
-                                // value={this.state.customer.customerAddress}
-                                // onChange={(e) => {
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerAddress = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                           value={this.state.fullName}
+                                           onChange={(e) => {
+                                               this.setState({fullName: e.target.value})
+                                           }}
                             />
                         </Stack>
 
@@ -87,110 +80,90 @@ class SignUp extends Component {
                             <TextValidator sx={{width: '100%'}} label="Password"
                                            variant="outlined"
                                            validators={['required',]}
-                                // value={this.state.customer.customerContact}
-                                // onChange={(e) => {
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerContact = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                           value={this.state.fullName}
+                                           onChange={(e) => {
+                                               this.setState({fullName: e.target.value})
+                                           }}
                             />
-                            <TextValidator sx={{width: '100%'}}  label="City"
+                            <TextValidator sx={{width: '100%'}} label="City"
                                            variant="outlined"
                                            validators={['required',]}
-                                // value={this.state.customer.customerEmail}
-                                // onChange={(e) => {
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerEmail = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                           value={this.state.fullName}
+                                           onChange={(e) => {
+                                               this.setState({fullName: e.target.value})
+                                           }}
                             />
                         </Stack>
 
 
                         <Stack direction="row" spacing={5}>
-                            <TextValidator sx={{width: '100%'}}  label="Street"
+                            <TextValidator sx={{width: '100%'}} label="Street"
                                            variant="outlined"
                                            validators={['required',]}
-                                // value={this.state.customer.customerPassword}
-                                // onChange={(e) => {
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerPassword = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                           value={this.state.fullName}
+                                           onChange={(e) => {
+                                               this.setState({fullName: e.target.value})
+                                           }}
                             />
-                            <TextValidator sx={{width: '100%'}}  label="Street No"
+                            <TextValidator sx={{width: '100%'}} label="Street No"
                                            variant="outlined"
                                            validators={['required',]}
-                                // value={this.state.customer.customerPassword}
-                                // onChange={(e) => {
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerPassword = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                           value={this.state.fullName}
+                                           onChange={(e) => {
+                                               this.setState({fullName: e.target.value})
+                                           }}
                             />
                         </Stack>
-
 
 
                         <Stack direction="row" spacing={5}>
-                            <TextValidator sx={{width: '100%'}}  label="Zip Code"
+                            <TextValidator sx={{width: '100%'}} label="Zip Code"
                                            variant="outlined"
                                            validators={['required',]}
-                                // value={this.state.customer.customerPassword}
-                                // onChange={(e) => {
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerPassword = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                           value={this.state.fullName}
+                                           onChange={(e) => {
+                                               this.setState({fullName: e.target.value})
+                                           }}
                             />
-                            <TextValidator sx={{width: '100%'}}  label="Lat Value"
+                            <TextValidator sx={{width: '100%'}} label="Lat Value"
                                            variant="outlined"
                                            validators={['required',]}
-                                // value={this.state.customer.customerPassword}
-                                // onChange={(e) => {
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerPassword = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                           value={this.state.fullName}
+                                           onChange={(e) => {
+                                               this.setState({fullName: e.target.value})
+                                           }}
                             />
                         </Stack>
-
 
 
                         <Stack direction="row" spacing={5}>
-                            <TextValidator sx={{width: '100%'}}  label="Long Value"
+                            <TextValidator sx={{width: '100%'}} label="Long Value"
                                            variant="outlined"
                                            validators={['required',]}
-                                // value={this.state.customer.customerPassword}
-                                // onChange={(e) => {
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerPassword = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                           value={this.state.fullName}
+                                           onChange={(e) => {
+                                               this.setState({fullName: e.target.value})
+                                           }}
                             />
-                            <TextValidator sx={{width: '100%'}}  label="Mobile No"
+                            <TextValidator sx={{width: '100%'}} label="Mobile No"
                                            variant="outlined"
                                            validators={['required',]}
-                                // value={this.state.customer.customerPassword}
-                                // onChange={(e) => {
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerPassword = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                           value={this.state.fullName}
+                                           onChange={(e) => {
+                                               this.setState({fullName: e.target.value})
+                                           }}
                             />
 
                         </Stack>
-
-
-
 
 
                         <Stack width="100%" spacing={3} direction="row">
 
-                            <Button style={{backgroundColor: '#f1c40f',width:'calc(1/5)'}} variant="contained" size="large">
+                            <Button style={{backgroundColor: '#f1c40f', width: 'calc(1/5)'}} variant="contained"
+                                    size="large">
                                 CLEAR
                             </Button>
-                            <Button type="submit" style={{width:'calc(2/5)'}} variant="contained" size="large">
+                            <Button type="submit" style={{width: 'calc(2/5)'}} variant="contained" size="large">
                                 SAVE
                             </Button>
 
@@ -229,14 +202,11 @@ class SignUp extends Component {
                                 <TableCell aliign="left"></TableCell>
                                 <TableCell aliign="left"></TableCell>
                                 <TableCell aliign="left"></TableCell>
-
-                                <TableCell aliign="left"></TableCell>
-                                <TableCell
-                                    aliign="left"></TableCell>
                                 <TableCell aliign="left"></TableCell>
                                 <TableCell aliign="left"></TableCell>
-                                <TableCell
-                                    aliign="left"></TableCell>
+                                <TableCell aliign="left"></TableCell>
+                                <TableCell aliign="left"></TableCell>
+                                <TableCell aliign="left"></TableCell>
                                 <TableCell aliign="left"></TableCell>
                                 <TableCell aliign="left">
                                     <IconButton onClick={() => {
