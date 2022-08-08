@@ -15,6 +15,8 @@ import IconButton from "@mui/joy/IconButton";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
 import swal from 'sweetalert';
+import ProductService from "../../services/ProductService";
+import UserService from "../../services/UserService";
 
 class SignUp extends Component {
     constructor(props) {
@@ -32,6 +34,21 @@ class SignUp extends Component {
             latValue: '',
             longValue: '',
             mobileNo: '',
+            userList:[]
+        }
+    }
+
+    componentDidMount() {
+        this.loadAllUsers();
+    }
+
+    loadAllUsers = async () => {
+        const resp = await UserService.fetchUsers();
+        if (resp.status === 200) {
+            console.log(resp.data);
+            this.setState({userList: resp.data})
+        } else {
+            console.log("errr" + resp);
         }
     }
 
@@ -185,7 +202,7 @@ class SignUp extends Component {
                     <Table style={{backgroundColor: '#ecf0f1'}}>
                         <TableHead>
                             <TableRow>
-                                <TableCell aliign="left">Full Name</TableCell>
+                                <TableCell aliign="left">First Name</TableCell>
                                 <TableCell aliign="left">Last Name</TableCell>
                                 <TableCell aliign="left">E-mail</TableCell>
                                 <TableCell aliign="left">User Name</TableCell>
@@ -201,23 +218,23 @@ class SignUp extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {/*{*/}
-                            {/*    this.state.vehicleList.map((row) => (*/}
+                            {
+                                this.state.userList.map((row) => (
                             <TableRow>
-                                <TableCell aliign="left"></TableCell>
+                                <TableCell aliign="left">{row.name.firstname}</TableCell>
                                 <TableCell aliign="left">
-                                    {/*<Avatar src={baseUrl+row.image1} alt=""/>*/}
+                                    {row.name.lastname}
                                 </TableCell>
-                                <TableCell aliign="left"></TableCell>
-                                <TableCell aliign="left"></TableCell>
-                                <TableCell aliign="left"></TableCell>
-                                <TableCell aliign="left"></TableCell>
-                                <TableCell aliign="left"></TableCell>
-                                <TableCell aliign="left"></TableCell>
-                                <TableCell aliign="left"></TableCell>
-                                <TableCell aliign="left"></TableCell>
-                                <TableCell aliign="left"></TableCell>
-                                <TableCell aliign="left"></TableCell>
+                                <TableCell aliign="left">{row.email}</TableCell>
+                                <TableCell aliign="left">{row.username}</TableCell>
+                                <TableCell aliign="left">{row.password}</TableCell>
+                                <TableCell aliign="left">{row.address.city}</TableCell>
+                                <TableCell aliign="left">{row.address.street}</TableCell>
+                                <TableCell aliign="left">{row.address.number}</TableCell>
+                                <TableCell aliign="left">{row.address.zipcode}</TableCell>
+                                <TableCell aliign="left">{row.address.geolocation.lat}</TableCell>
+                                <TableCell aliign="left">{row.address.geolocation.long}</TableCell>
+                                <TableCell aliign="left">{row.phone}</TableCell>
                                 <TableCell aliign="left">
                                     <IconButton onClick={() => {
 
@@ -259,8 +276,8 @@ class SignUp extends Component {
                                 </TableCell>
                             </TableRow>
 
-                            {/*    ))*/}
-                            {/*}*/}
+                                ))
+                            }
                         </TableBody>
                     </Table>
                 </TableContainer>

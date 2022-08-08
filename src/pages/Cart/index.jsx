@@ -20,6 +20,8 @@ import swal from 'sweetalert';
 import {DesktopDatePicker} from "@mui/x-date-pickers";
 import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import ProductService from "../../services/ProductService";
+import CartService from "../../services/CartService";
 
 class Cart extends Component {
     constructor(props) {
@@ -28,7 +30,22 @@ class Cart extends Component {
             value: 1,
             selectUserName: "",
             selectProductTitle: "",
-            date: ""
+            date: "",
+            cartList:[]
+        }
+    }
+
+    componentDidMount() {
+        this.loadAllCarts();
+    }
+
+    loadAllCarts = async () => {
+        const resp = await CartService.fetchCarts();
+        if (resp.status === 200) {
+            console.log(resp.data);
+            this.setState({cartList: resp.data})
+        } else {
+            console.log("errr" + resp);
         }
     }
 
@@ -133,8 +150,8 @@ class Cart extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {/*{*/}
-                            {/*    this.state.vehicleList.map((row) => (*/}
+                            {
+                                this.state.cartList.map((row) => (
                             <TableRow>
                                 <TableCell aliign="left"></TableCell>
                                 <TableCell aliign="left">
@@ -187,8 +204,8 @@ class Cart extends Component {
                                 </TableCell>
                             </TableRow>
 
-                            {/*    ))*/}
-                            {/*}*/}
+                                ))
+                            }
                         </TableBody>
                     </Table>
                 </TableContainer>

@@ -160,16 +160,18 @@ class Product extends Component {
                             {
                                 this.state.productList.map((row) => (
                                     <TableRow>
-                                        <TableCell aliign="left"></TableCell>
+                                        <TableCell aliign="left">{row.id}</TableCell>
                                         <TableCell aliign="left">
-                                            {/*<Avatar src={row.image1} alt=""/>*/}
+                                            {row.title}
                                         </TableCell>
-                                        <TableCell aliign="left"></TableCell>
-                                        <TableCell aliign="left"></TableCell>
+                                        <TableCell aliign="left">
+                                            <Avatar src={row.image} alt=""/>
+                                        </TableCell>
+                                        <TableCell aliign="left">{row.price}</TableCell>
 
-                                        <TableCell aliign="left"></TableCell>
+                                        <TableCell aliign="left">{row.category}</TableCell>
                                         <TableCell
-                                            aliign="left"></TableCell>
+                                            aliign="left">{row.description}</TableCell>
                                         <TableCell aliign="left">
                                             <IconButton onClick={() => {
 
