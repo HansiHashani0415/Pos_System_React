@@ -22,6 +22,16 @@ class SignUp extends Component {
         this.state = {
             fullName: '',
             lastName: '',
+            email: '',
+            userName: '',
+            password: '',
+            street: '',
+            streetNo: '',
+            zipCode: '',
+            city: '',
+            latValue: '',
+            longValue: '',
+            mobileNo: '',
         }
     }
 
@@ -60,17 +70,17 @@ class SignUp extends Component {
                             <TextValidator sx={{width: '100%'}}
                                            label="E-mail" variant="outlined"
                                            validators={['required',]}
-                                           value={this.state.fullName}
+                                           value={this.state.email}
                                            onChange={(e) => {
-                                               this.setState({fullName: e.target.value})
+                                               this.setState({email: e.target.value})
                                            }}
                             />
                             <TextValidator sx={{width: '100%'}} label="User Name"
                                            variant="outlined"
                                            validators={['required',]}
-                                           value={this.state.fullName}
+                                           value={this.state.userName}
                                            onChange={(e) => {
-                                               this.setState({fullName: e.target.value})
+                                               this.setState({userName: e.target.value})
                                            }}
                             />
                         </Stack>
@@ -80,17 +90,17 @@ class SignUp extends Component {
                             <TextValidator sx={{width: '100%'}} label="Password"
                                            variant="outlined"
                                            validators={['required',]}
-                                           value={this.state.fullName}
+                                           value={this.state.password}
                                            onChange={(e) => {
-                                               this.setState({fullName: e.target.value})
+                                               this.setState({password: e.target.value})
                                            }}
                             />
                             <TextValidator sx={{width: '100%'}} label="City"
                                            variant="outlined"
                                            validators={['required',]}
-                                           value={this.state.fullName}
+                                           value={this.state.city}
                                            onChange={(e) => {
-                                               this.setState({fullName: e.target.value})
+                                               this.setState({city: e.target.value})
                                            }}
                             />
                         </Stack>
@@ -100,17 +110,17 @@ class SignUp extends Component {
                             <TextValidator sx={{width: '100%'}} label="Street"
                                            variant="outlined"
                                            validators={['required',]}
-                                           value={this.state.fullName}
+                                           value={this.state.street}
                                            onChange={(e) => {
-                                               this.setState({fullName: e.target.value})
+                                               this.setState({street: e.target.value})
                                            }}
                             />
                             <TextValidator sx={{width: '100%'}} label="Street No"
                                            variant="outlined"
                                            validators={['required',]}
-                                           value={this.state.fullName}
+                                           value={this.state.streetNo}
                                            onChange={(e) => {
-                                               this.setState({fullName: e.target.value})
+                                               this.setState({streetNo: e.target.value})
                                            }}
                             />
                         </Stack>
@@ -120,17 +130,17 @@ class SignUp extends Component {
                             <TextValidator sx={{width: '100%'}} label="Zip Code"
                                            variant="outlined"
                                            validators={['required',]}
-                                           value={this.state.fullName}
+                                           value={this.state.zipCode}
                                            onChange={(e) => {
-                                               this.setState({fullName: e.target.value})
+                                               this.setState({zipCode: e.target.value})
                                            }}
                             />
                             <TextValidator sx={{width: '100%'}} label="Lat Value"
                                            variant="outlined"
                                            validators={['required',]}
-                                           value={this.state.fullName}
+                                           value={this.state.latValue}
                                            onChange={(e) => {
-                                               this.setState({fullName: e.target.value})
+                                               this.setState({latValue: e.target.value})
                                            }}
                             />
                         </Stack>
@@ -140,17 +150,17 @@ class SignUp extends Component {
                             <TextValidator sx={{width: '100%'}} label="Long Value"
                                            variant="outlined"
                                            validators={['required',]}
-                                           value={this.state.fullName}
+                                           value={this.state.longValue}
                                            onChange={(e) => {
-                                               this.setState({fullName: e.target.value})
+                                               this.setState({longValue: e.target.value})
                                            }}
                             />
                             <TextValidator sx={{width: '100%'}} label="Mobile No"
                                            variant="outlined"
                                            validators={['required',]}
-                                           value={this.state.fullName}
+                                           value={this.state.mobileNo}
                                            onChange={(e) => {
-                                               this.setState({fullName: e.target.value})
+                                               this.setState({mobileNo: e.target.value})
                                            }}
                             />
 

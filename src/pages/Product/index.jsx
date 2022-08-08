@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+    Avatar,
     Button,
     Stack,
     Table,
@@ -16,6 +17,8 @@ import IconButton from "@mui/joy/IconButton";
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import DeleteIcon from '@mui/icons-material/Delete';
 import swal from 'sweetalert';
+import ProductService from "../../services/ProductService";
+
 
 class Product extends Component {
     constructor(props) {
@@ -24,9 +27,37 @@ class Product extends Component {
             value: 1,
             selectUserName: "",
             selectProductTitle: "",
-            date: ""
+            date: "",
+            productList: []
         }
     }
+
+    componentDidMount() {
+        this.loadAllProducts();
+    }
+
+    loadAllProducts = async () => {
+        const resp = await ProductService.fetchProducts();
+        if (resp.status === 200) {
+            console.log(resp.data);
+            this.setState({productList: resp.data})
+        } else {
+            console.log("errr" + resp);
+        }
+    }
+
+    // getAllProducts = async () => {
+    //     let resp = await ProductService.fetchProducts();
+    //     if (resp.status === 200) {
+    //         let list = resp.data;
+    //         console.log(list)
+    //         this.setState({productList: list})
+    //         console.log(this.state.productList);
+    //     } else {
+    //         console.log(resp);
+    //     }
+    // }
+
 
     render() {
 
@@ -126,62 +157,59 @@ class Product extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {/*{*/}
-                            {/*    this.state.vehicleList.map((row) => (*/}
-                            <TableRow>
-                                <TableCell aliign="left"></TableCell>
-                                <TableCell aliign="left">
-                                    {/*<Avatar src={baseUrl+row.image1} alt=""/>*/}
-                                </TableCell>
-                                <TableCell aliign="left"></TableCell>
-                                <TableCell aliign="left"></TableCell>
+                            {
+                                this.state.productList.map((row) => (
+                                    <TableRow>
+                                        <TableCell aliign="left"></TableCell>
+                                        <TableCell aliign="left">
+                                            {/*<Avatar src={row.image1} alt=""/>*/}
+                                        </TableCell>
+                                        <TableCell aliign="left"></TableCell>
+                                        <TableCell aliign="left"></TableCell>
 
-                                <TableCell aliign="left"></TableCell>
-                                <TableCell
-                                    aliign="left"></TableCell>
-                                <TableCell aliign="left">
-                                    <IconButton onClick={() => {
+                                        <TableCell aliign="left"></TableCell>
+                                        <TableCell
+                                            aliign="left"></TableCell>
+                                        <TableCell aliign="left">
+                                            <IconButton onClick={() => {
 
-                                        // console.log(baseUrl+row.image1);
-                                        // this.setState({btnVehicle: "Update"});
-                                        // this.setState({vehicle: row});
-                                    }
+                                            }
 
-                                    }>
-                                        <BorderColorIcon style={{color: '#2ecc71'}}/>
-                                    </IconButton>
+                                            }>
+                                                <BorderColorIcon style={{color: '#2ecc71'}}/>
+                                            </IconButton>
 
-                                    <IconButton onClick={() => {
-                                        swal({
-                                            title: "Are you sure?",
-                                            text: "Once deleted, you will not be able to recover this imaginary file!",
-                                            icon: "warning",
-                                            buttons: true,
-                                            dangerMode: true,
-                                        })
-                                            .then((willDelete) => {
+                                            <IconButton onClick={() => {
+                                                swal({
+                                                    title: "Are you sure?",
+                                                    text: "Once deleted, you will not be able to recover this imaginary file!",
+                                                    icon: "warning",
+                                                    buttons: true,
+                                                    dangerMode: true,
+                                                })
+                                                    .then((willDelete) => {
 
-                                                if (willDelete) {
-                                                    // this.deleteVehicle(row.vehicleID);
-                                                    // swal("Poof! Your imaginary file has been deleted!", {
-                                                    //     icon: "success",
-                                                    // });
-                                                } else {
-                                                    // swal("Your imaginary file is safe!");
-                                                }
-                                            });
-                                    }
+                                                        if (willDelete) {
+                                                            // this.deleteVehicle(row.vehicleID);
+                                                            // swal("Poof! Your imaginary file has been deleted!", {
+                                                            //     icon: "success",
+                                                            // });
+                                                        } else {
+                                                            // swal("Your imaginary file is safe!");
+                                                        }
+                                                    });
+                                            }
 
-                                    }
-                                    >
-                                        <DeleteIcon style={{color: '#e74c3c'}}/>
-                                    </IconButton>
+                                            }
+                                            >
+                                                <DeleteIcon style={{color: '#e74c3c'}}/>
+                                            </IconButton>
 
-                                </TableCell>
-                            </TableRow>
+                                        </TableCell>
+                                    </TableRow>
 
-                            {/*    ))*/}
-                            {/*}*/}
+                                ))
+                            }
                         </TableBody>
                     </Table>
                 </TableContainer>
