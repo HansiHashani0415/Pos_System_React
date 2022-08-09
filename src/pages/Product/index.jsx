@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {
     Avatar,
-    Button,
+    Button, FormControl, InputLabel, MenuItem, Select,
     Stack,
     Table,
     TableBody,
@@ -28,12 +28,15 @@ class Product extends Component {
             selectUserName: "",
             selectProductTitle: "",
             date: "",
-            productList: []
+            productList: [],
+            categoryList: []
         }
     }
 
+
     componentDidMount() {
         this.loadAllProducts();
+        this.loadAllCategories();
     }
 
     loadAllProducts = async () => {
@@ -41,6 +44,16 @@ class Product extends Component {
         if (resp.status === 200) {
             console.log(resp.data);
             this.setState({productList: resp.data})
+        } else {
+            console.log("errr" + resp);
+        }
+    }
+
+    loadAllCategories = async () => {
+        const resp = await ProductService.fetchProductCategories();
+        if (resp.status === 200) {
+            console.log(resp.data);
+            this.setState({categoryList: resp.data})
         } else {
             console.log("errr" + resp);
         }
@@ -61,6 +74,9 @@ class Product extends Component {
 
     render() {
 
+        const handleChangeCategory = (event, newValue) => {
+            this.setState({selectCategory: newValue})
+        };
 
         return (
             <>
@@ -106,16 +122,23 @@ class Product extends Component {
                         </Stack>
 
                         <Stack direction="row" spacing={5}>
-                            <TextValidator sx={{width: '100%'}}
-                                           label="Category" variant="outlined"
-                                           validators={['required',]}
-                                // value={this.state.customer.customerDrivingLicenseNo}
-                                // onChange={(e) => {
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerDrivingLicenseNo = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
-                            />
+                            <FormControl fullWidth>
+                                <InputLabel id="demo-simple-select-label">Category</InputLabel>
+                                <Select
+                                    labelId="demo-simple-select-label"
+                                    id="demo-simple-select"
+                                    value={this.state.selectCategory}
+                                    label="Category"
+                                    onChange={handleChangeCategory}
+                                >
+                                    {/*<MenuItem value="None">None</MenuItem>*/}
+                                    {this.state.categoryList.map((category) => (
+                                        <MenuItem value={category}>{category}</MenuItem>
+                                    ))
+                                    }
+
+                                </Select>
+                            </FormControl>
                             <TextValidator sx={{width: '100%'}} label="Description"
                                            variant="outlined"
                                            validators={['required',]}
