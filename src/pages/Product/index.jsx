@@ -23,16 +23,30 @@ import ProductService from "../../services/ProductService";
 class Product extends Component {
     constructor(props) {
         super(props);
+        this.uploadImage = this.uploadImage.bind(this);
         this.state = {
             value: 1,
             selectUserName: "",
             selectProductTitle: "",
             date: "",
             productList: [],
-            categoryList: []
+            categoryList: [],
+            product:{
+                id: '',
+                title: '',
+                price: '',
+                description: '',
+                category: '',
+                image: ''
+            },
+            image: undefined
         }
     }
 
+    uploadImage(e) {
+        console.log(e.target.files[0]);
+        this.setState({image: e.target.files[0]});
+    }
 
     componentDidMount() {
         this.loadAllProducts();
@@ -56,6 +70,21 @@ class Product extends Component {
             this.setState({categoryList: resp.data})
         } else {
             console.log("errr" + resp);
+        }
+    }
+
+    deleteProduct = async (id) => {
+
+        let params = {id: id}
+        console.log(id+"jhgjg")
+        let resp = await ProductService.deleteProduct(id);
+        console.log(resp);
+        if (resp.status === 200) {
+            console.log("Deleted..");
+            // this.loadAllProducts();
+            // this.clearDetails();
+        } else {
+            console.log(resp);
         }
     }
 
@@ -88,34 +117,34 @@ class Product extends Component {
                                            variant="outlined"
                                            validators={['required',]}
 
-                                // value={this.state.customer.customerName}
-                                // onChange={(e) => {
-                                //     console.log()
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerName = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                value={this.state.product.title}
+                                onChange={(e) => {
+                                    console.log()
+                                    let tempProduct = this.state.product;
+                                    tempProduct.title = e.target.value;
+                                    this.setState({tempProduct})
+                                }}
                             />
 
                             <TextValidator sx={{width: '100%'}} label="Price"
                                            variant="outlined" validators={['required',]}
-                                // value={this.state.customer.customerNIC}
-                                // onChange={(e) => {
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerNIC = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                value={this.state.product.price}
+                                onChange={(e) => {
+                                    let tempProduct = this.state.product;
+                                    tempProduct.price = e.target.value;
+                                    this.setState({tempProduct})
+                                }}
                             />
                             <Button style={{height: '55px'}} variant="contained" component="label">
                                 Upload
                                 <PhotoCameraIcon/>
                                 <input hidden accept="image/*" multiple type="file"
-                                    // onChange={this.uploadImage}
+                                    onChange={this.uploadImage}
                                 />
                             </Button>
                             <div style={{border: '1px solid red', width: '8%', height: '55px', borderRadius: '54px'}}>
-                                {/*{this.state.image1 &&*/}
-                                {/*<img height="70px" src={URL.createObjectURL(this.state.image1)} alt=""/>}*/}
+                                {this.state.image &&
+                                <img height="70px" src={this.state.image} alt=""/>}
 
                             </div>
 
@@ -142,12 +171,12 @@ class Product extends Component {
                             <TextValidator sx={{width: '100%'}} label="Description"
                                            variant="outlined"
                                            validators={['required',]}
-                                // value={this.state.customer.customerAddress}
-                                // onChange={(e) => {
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerAddress = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                value={this.state.product.description}
+                                onChange={(e) => {
+                                    let tempProduct = this.state.product;
+                                    tempProduct.description = e.target.value;
+                                    this.setState({tempProduct})
+                                }}
                             />
                         </Stack>
 
@@ -197,7 +226,8 @@ class Product extends Component {
                                             aliign="left">{row.description}</TableCell>
                                         <TableCell aliign="left">
                                             <IconButton onClick={() => {
-
+                                                console.log(row.image)
+                                                this.setState({product: row});
                                             }
 
                                             }>
@@ -215,12 +245,13 @@ class Product extends Component {
                                                     .then((willDelete) => {
 
                                                         if (willDelete) {
-                                                            // this.deleteVehicle(row.vehicleID);
-                                                            // swal("Poof! Your imaginary file has been deleted!", {
-                                                            //     icon: "success",
-                                                            // });
+                                                            console.log(row.id)
+                                                            this.deleteProduct(row.id);
+                                                            swal("Poof! Your imaginary file has been deleted!", {
+                                                                icon: "success",
+                                                            });
                                                         } else {
-                                                            // swal("Your imaginary file is safe!");
+                                                            swal("Your imaginary file is safe!");
                                                         }
                                                     });
                                             }
