@@ -202,6 +202,7 @@ class SignUp extends Component {
                     <Table style={{backgroundColor: '#ecf0f1'}}>
                         <TableHead>
                             <TableRow>
+                                <TableCell aliign="left">ID</TableCell>
                                 <TableCell aliign="left">First Name</TableCell>
                                 <TableCell aliign="left">Last Name</TableCell>
                                 <TableCell aliign="left">E-mail</TableCell>
@@ -221,6 +222,7 @@ class SignUp extends Component {
                             {
                                 this.state.userList.map((row) => (
                             <TableRow>
+                                <TableCell aliign="left">{row.id}</TableCell>
                                 <TableCell aliign="left">{row.name.firstname}</TableCell>
                                 <TableCell aliign="left">
                                     {row.name.lastname}
