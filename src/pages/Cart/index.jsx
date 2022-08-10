@@ -22,6 +22,7 @@ import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
 import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import ProductService from "../../services/ProductService";
 import CartService from "../../services/CartService";
+import UserService from "../../services/UserService";
 
 class Cart extends Component {
     constructor(props) {
@@ -31,23 +32,47 @@ class Cart extends Component {
             selectUserName: "",
             selectProductTitle: "",
             date: "",
-            cartList:[]
+            cartList:[],
+            productList:[],
+            userList:[]
         }
     }
 
     componentDidMount() {
-        this.loadAllCarts();
+        this.loadAllProducts();
+        this.loadAllUsers();
+
     }
 
-    loadAllCarts = async () => {
-        const resp = await CartService.fetchCarts();
+    loadAllProducts = async () => {
+        const resp = await ProductService.fetchProducts();
         if (resp.status === 200) {
             console.log(resp.data);
-            this.setState({cartList: resp.data})
+            this.setState({productList: resp.data})
         } else {
             console.log("errr" + resp);
         }
     }
+
+    loadAllUsers = async () => {
+        const resp = await UserService.fetchUsers();
+        if (resp.status === 200) {
+            console.log(resp.data);
+            this.setState({userList: resp.data})
+        } else {
+            console.log("errr" + resp);
+        }
+    }
+
+    // loadAllCarts = async () => {
+    //     const resp = await CartService.fetchCarts();
+    //     if (resp.status === 200) {
+    //         console.log(resp.data);
+    //         this.setState({cartList: resp.data})
+    //     } else {
+    //         console.log("errr" + resp);
+    //     }
+    // }
 
     render() {
         const handleChangeCartUserName = (event, newValue) => {
@@ -77,9 +102,10 @@ class Cart extends Component {
                                     label="Age"
                                     onChange={handleChangeCartUserName}
                                 >
-                                    <MenuItem value="None">None</MenuItem>
-                                    <MenuItem value="Ten">Ten</MenuItem>
-
+                                    {this.state.userList.map((user) => (
+                                        <MenuItem value={user.username}>{user.username}</MenuItem>
+                                    ))
+                                    }
                                 </Select>
                             </FormControl>
 
@@ -105,8 +131,10 @@ class Cart extends Component {
                                     label="Age"
                                     onChange={handleChangeCartProductTitle}
                                 >
-                                    <MenuItem value="None">None</MenuItem>
-                                    <MenuItem value="Ten">Ten</MenuItem>
+                                    {this.state.productList.map((product) => (
+                                        <MenuItem value={product.title}>{product.title}</MenuItem>
+                                    ))
+                                    }
                                 </Select>
                             </FormControl>
                             <TextValidator sx={{width: '100%'}} label="Qty"
@@ -141,11 +169,10 @@ class Cart extends Component {
                         <TableHead>
                             <TableRow>
                                 <TableCell aliign="left">Product ID</TableCell>
+                                <TableCell aliign="left">Category</TableCell>
                                 <TableCell aliign="left">Title</TableCell>
                                 <TableCell aliign="left">Image</TableCell>
                                 <TableCell aliign="left">Price</TableCell>
-                                <TableCell aliign="left">Category</TableCell>
-                                <TableCell aliign="left">Description</TableCell>
                                 <TableCell aliign="left">Action</TableCell>
                             </TableRow>
                         </TableHead>
@@ -160,7 +187,6 @@ class Cart extends Component {
                                 <TableCell aliign="left"></TableCell>
                                 <TableCell aliign="left"></TableCell>
 
-                                <TableCell aliign="left"></TableCell>
                                 <TableCell
                                     aliign="left"></TableCell>
                                 <TableCell aliign="left">

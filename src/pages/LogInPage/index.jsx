@@ -35,14 +35,15 @@ class LogInPage extends Component {
 
 
 
-                    <Stack direction='column' spacing={3} sx={{border:'1px solid green', width:'300px',height:'300px'}}>
-                        <h1>Log In</h1>
+                    <Stack direction='column' spacing={3} sx={{ width:'315px',height:'395px',alignItems:'center', justifyContent:'center'}}>
+
                         <ValidatorForm
                              onSubmit={signInOnClick}
                             onError={error => console.log(error)}>
                             <Stack spacing={3} justifyContent="center" alignItems="">
-
+                                <h1>Log In</h1>
                                 <TextValidator
+                                    sx={{width:'100%'}}
                                     helperText="Please enter your username"
                                     id="demo-helper-text-misaligned"
                                     label="User Name"
@@ -54,6 +55,7 @@ class LogInPage extends Component {
                                     }}/>
 
                                 <TextValidator
+                                    sx={{width:'100%'}}
                                     id="outlined-password-input"
                                     label="Password"
                                     type="password"
@@ -66,10 +68,10 @@ class LogInPage extends Component {
 
                                     }}/>
 
-
+                                <Button variant="contained" type="submit">Log In</Button>
+                                <p>Create new user account? <a href="/signUp">click here</a></p>
                             </Stack>
-                            <Button variant="contained" type="submit">Log In</Button>
-                            <p>Create new user account? <a href="/signUp">click here</a></p>
+
                             {/*<Button variant="contained" onClick={handleClose}>Sign Up</Button>*/}
                         </ValidatorForm>
 

@@ -52,6 +52,21 @@ class SignUp extends Component {
         }
     }
 
+    deleteUser = async (id) => {
+
+        let params = {id: id}
+        console.log(id+"user deleted..")
+        let resp = await UserService.deleteUser(id);
+        console.log(resp);
+        if (resp.status === 200) {
+            console.log("Deleted..");
+            // this.loadAllProducts();
+            // this.clearDetails();
+        } else {
+            console.log(resp);
+        }
+    }
+
     render() {
         const submit = () => {
             console.log("submit")
@@ -240,6 +255,7 @@ class SignUp extends Component {
                                 <TableCell aliign="left">
                                     <IconButton onClick={() => {
 
+                                        this.setState({user: row});
                                         // console.log(baseUrl+row.image1);
                                         // this.setState({btnVehicle: "Update"});
                                         // this.setState({vehicle: row});
@@ -260,12 +276,13 @@ class SignUp extends Component {
                                             .then((willDelete) => {
 
                                                 if (willDelete) {
-                                                    // this.deleteVehicle(row.vehicleID);
-                                                    // swal("Poof! Your imaginary file has been deleted!", {
-                                                    //     icon: "success",
-                                                    // });
+                                                    console.log(row.id+"hhhhhhhhhhhhhhhhhh")
+                                                    this.deleteUser(row.id);
+                                                    swal("Poof! Your imaginary file has been deleted!", {
+                                                        icon: "success",
+                                                    });
                                                 } else {
-                                                    // swal("Your imaginary file is safe!");
+                                                    swal("Your imaginary file is safe!");
                                                 }
                                             });
                                     }
