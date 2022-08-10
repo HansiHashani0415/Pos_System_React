@@ -30,7 +30,7 @@ class Cart extends Component {
         this.state = {
             value: 1,
             selectUserName: "",
-            selectProductTitle: "",
+            selectProduct: "",
             date: "",
 qty:'',
             productList:[],
@@ -93,7 +93,8 @@ qty:'',
             console.log(this.state.selectProduct)
             let cartList = this.state.cartList;
             cartList.push({
-                product:this.state.selectProduct
+                product:this.state.selectProduct,
+                qty:this.state.qty
             });
             this.setState({cartList: cartList})
         };
@@ -138,7 +139,7 @@ qty:'',
                                 <Select
                                     labelId="demo-simple-select-label"
                                     id="demo-simple-select"
-                                    value={this.state.selectProductTitle}
+                                    value={this.state.selectProduct.title}
                                     label="Age"
                                     onChange={handleChangeCartProductTitle}
                                 >
@@ -181,8 +182,8 @@ qty:'',
                                 <TableCell aliign="left">Product ID</TableCell>
                                 <TableCell aliign="left">Category</TableCell>
                                 <TableCell aliign="left">Title</TableCell>
-                                <TableCell aliign="left">Image</TableCell>
                                 <TableCell aliign="left">Price</TableCell>
+                                <TableCell aliign="left">Qty</TableCell>
                                 <TableCell aliign="left">Action</TableCell>
                             </TableRow>
                         </TableHead>
@@ -190,13 +191,11 @@ qty:'',
                             {
                                 this.state.cartList.map((row) => (
                             <TableRow>
-                                <TableCell aliign="left"></TableCell>
-                                <TableCell aliign="left"></TableCell>
-                                <TableCell aliign="left">{row.product}</TableCell>
-                                <TableCell aliign="left"></TableCell>
-
-                                <TableCell
-                                    aliign="left"></TableCell>
+                                <TableCell aliign="left">{row.product.id}</TableCell>
+                                <TableCell aliign="left">{row.product.category}</TableCell>
+                                <TableCell aliign="left">{row.product.title}</TableCell>
+                                <TableCell aliign="left">{row.product.price}</TableCell>
+                                <TableCell aliign="left">{row.qty}</TableCell>
                                 <TableCell aliign="left">
                                     <IconButton onClick={() => {
 
