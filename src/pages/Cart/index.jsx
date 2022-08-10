@@ -32,11 +32,14 @@ class Cart extends Component {
             selectUserName: "",
             selectProductTitle: "",
             date: "",
-            cartList:[],
+qty:'',
             productList:[],
-            userList:[]
+            userList:[],
+            cartList:[],
         }
     }
+
+
 
     componentDidMount() {
         this.loadAllProducts();
@@ -79,17 +82,25 @@ class Cart extends Component {
             this.setState({selectUsername: newValue})
         };
 
-        const handleChangeCartProductTitle = (event, newValue) => {
-            this.setState({selectProductTitle: newValue})
+        const handleChangeCartProductTitle = ( e) => {
+            this.setState({selectProduct: e.target.value})
         };
 
         const selectDate = (newValue) => {
             this.setState({date: newValue})
         };
+        const addToCart = () => {
+            console.log(this.state.selectProduct)
+            let cartList = this.state.cartList;
+            cartList.push({
+                product:this.state.selectProduct
+            });
+            this.setState({cartList: cartList})
+        };
 
         return (
             <>
-                <ValidatorForm onError={error => console.log(error)}>
+                <ValidatorForm onSubmit={addToCart} onError={error => console.log(error)}>
                     <Stack direction="column" spacing={3}>
 
                         <Stack direction="row" spacing={5}>
@@ -132,7 +143,7 @@ class Cart extends Component {
                                     onChange={handleChangeCartProductTitle}
                                 >
                                     {this.state.productList.map((product) => (
-                                        <MenuItem value={product.title}>{product.title}</MenuItem>
+                                        <MenuItem value={product}>{product.title}</MenuItem>
                                     ))
                                     }
                                 </Select>
@@ -140,12 +151,11 @@ class Cart extends Component {
                             <TextValidator sx={{width: '100%'}} label="Qty"
                                            variant="outlined"
                                            validators={['required',]}
-                                // value={this.state.customer.customerAddress}
-                                // onChange={(e) => {
-                                //     let tempCustomer = this.state.customer;
-                                //     tempCustomer.customerAddress = e.target.value;
-                                //     this.setState({tempCustomer})
-                                // }}
+                                value={this.state.qty}
+                                onChange={(e) => {
+
+                                    this.setState({qty:e.target.value})
+                                }}
                             />
                         </Stack>
 
@@ -181,10 +191,8 @@ class Cart extends Component {
                                 this.state.cartList.map((row) => (
                             <TableRow>
                                 <TableCell aliign="left"></TableCell>
-                                <TableCell aliign="left">
-                                    {/*<Avatar src={baseUrl+row.image1} alt=""/>*/}
-                                </TableCell>
                                 <TableCell aliign="left"></TableCell>
+                                <TableCell aliign="left">{row.product}</TableCell>
                                 <TableCell aliign="left"></TableCell>
 
                                 <TableCell
